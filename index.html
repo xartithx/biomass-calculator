@@ -494,8 +494,9 @@ function lhvAt(f,m){
   // Scale: LHV_act ≈ f.lv * (1-m/100)/(1-f.mr/100) - 2442*(m/100 - f.mr/100)
   // Better: compute from HHV
   const HHV=f.hv*s;
-  const H_wet=f.H/100*s;
-  return HHV - 2442*(m/100 + 0.09*H_wet);
+  const H_wet=f.H/100*s;               // hydrogen as mass fraction (as-received at m)
+  // Water formed from H = 9 kg per kg H (not 0.09 — H_wet is already a fraction)
+  return HHV - 2442*(m/100 + 9*H_wet);
 }
 function arComp(f,m){
   const s=(1-m/100)/(1-f.mr/100);
